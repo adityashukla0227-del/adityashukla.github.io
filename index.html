@@ -1,154 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BMW Cinematic Portfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aditya Shukla | Portfolio</title>
 
 <style>
-body {
-  margin: 0;
-  overflow: hidden;
-  background: black;
-  font-family: Arial;
-}
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b1220;
+    color: #e5e7eb;
+  }
 
-/* INTRO */
-#ui {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  background: black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  color: white;
-}
+  /* ================= INTRO ================= */
+  #intro {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeOut 1s ease 3.5s forwards;
+  }
 
-h1 {
-  font-size: 50px;
-  background: linear-gradient(90deg,#38bdf8,#a78bfa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+  .logo {
+    font-size: 32px;
+    color: #38bdf8;
+    letter-spacing: 3px;
+    animation: zoomIn 1s ease;
+  }
 
-button {
-  margin-top: 20px;
-  padding: 12px 20px;
-  background: #38bdf8;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
+  .car {
+    font-size: 60px;
+    margin-top: 20px;
+    animation: drive 2s ease-in-out;
+  }
 
-/* CANVAS */
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
+  @keyframes zoomIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes drive {
+    0% { transform: translateX(-200px); }
+    100% { transform: translateX(200px); }
+  }
+
+  @keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+  }
+
+  /* ================= MAIN ================= */
+  .container {
+    max-width: 900px;
+    margin: auto;
+    padding: 60px 20px;
+  }
+
+  h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #38bdf8, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  p {
+    color: #94a3b8;
+    line-height: 1.6;
+  }
+
+  .section-title {
+    margin-top: 50px;
+    font-size: 22px;
+    color: #60a5fa;
+  }
+
+  .card {
+    background: #111827;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    transition: 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    background: #1f2937;
+  }
+
+  a {
+    color: #38bdf8;
+    text-decoration: none;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 18px;
+    background: #38bdf8;
+    color: black;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .btn:hover {
+    background: #0ea5e9;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    color: #64748b;
+    font-size: 14px;
+  }
 </style>
 </head>
 
 <body>
 
-<!-- UI -->
-<div id="ui">
-  <h1>ADITYA SHUKLA</h1>
-  <button onclick="startExperience()">START DRIVE</button>
+<!-- INTRO ANIMATION -->
+<div id="intro">
+  <div class="logo">ADITYA SHUKLA</div>
+  <div class="car">🏎️</div>
 </div>
 
-<!-- THREE.JS -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<!-- MAIN CONTENT -->
+<div class="container">
 
-<script>
-let scene = new THREE.Scene();
-let camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
-let renderer = new THREE.WebGLRenderer({antialias:true});
+  <h1>Aditya Shukla 👋</h1>
+  <p>Web Developer | AI Enthusiast | Builder of Modern Web Apps</p>
 
-renderer.setSize(innerWidth, innerHeight);
-document.body.appendChild(renderer.domElement);
+  <a href="#projects" class="btn">Enter Portfolio</a>
 
-camera.position.set(0,2,6);
+  <div class="section-title">About Me</div>
+  <div class="card">
+    I am a passionate web developer who builds fast, modern and interactive web applications using HTML, CSS and JavaScript.
+  </div>
 
-// LIGHT
-let light = new THREE.DirectionalLight(0xffffff,2);
-light.position.set(5,5,5);
-scene.add(light);
+  <div class="section-title" id="projects">Projects</div>
 
-// ROAD
-let road = new THREE.Mesh(
-  new THREE.PlaneGeometry(100,100),
-  new THREE.MeshStandardMaterial({color:0x111111})
-);
-road.rotation.x = -Math.PI/2;
-scene.add(road);
+  <div class="card">
+    <b>🔥 CalcPro</b><br>
+    Smart calculator web app with multiple tools
+  </div>
 
-// CAR
-let car = new THREE.Mesh(
-  new THREE.BoxGeometry(1.5,0.5,3),
-  new THREE.MeshStandardMaterial({color:0x38bdf8})
-);
-car.position.y = 0.5;
-scene.add(car);
+  <div class="card">
+    <b>💼 Portfolio Website</b><br>
+    Personal branding website hosted on GitHub Pages
+  </div>
 
-// SMOKE
-let geo = new THREE.BufferGeometry();
-let arr = [];
+  <div class="section-title">Skills</div>
+  <div class="card">
+    HTML • CSS • JavaScript • GitHub • UI Design • Problem Solving
+  </div>
 
-for(let i=0;i<400;i++){
-  arr.push((Math.random()-0.5)*10, Math.random()*2, (Math.random()-0.5)*10);
-}
+  <div class="section-title">Contact</div>
+  <div class="card">
+    Email: adityashukla0227@gmail.com <br>
+    GitHub: <a href="https://github.com/adityashukla0227-del" target="_blank">Profile</a> <br>
+    LinkedIn: Coming soon <br>
+    Instagram: <a href="https://www.instagram.com/growithaditya_009" target="_blank">Open Profile</a>
+  </div>
 
-geo.setAttribute('position', new THREE.Float32BufferAttribute(arr,3));
-let smoke = new THREE.Points(geo, new THREE.PointsMaterial({color:0x777777,size:0.05}));
-scene.add(smoke);
+  <footer>
+    © 2026 Aditya Shukla • Built with passion 🚀
+  </footer>
 
-// SOUND
-let engine = new Audio("https://www.fesliyanstudios.com/play-mp3/438");
-engine.loop = true;
-
-let speed = 0;
-
-// ANIMATE
-function animate(){
-  requestAnimationFrame(animate);
-
-  speed += 0.002;
-
-  car.position.z -= 0.08;
-
-  camera.position.z = car.position.z + 6;
-  camera.position.y = 2;
-
-  camera.lookAt(car.position);
-
-  smoke.rotation.y += 0.002;
-
-  renderer.render(scene,camera);
-}
-animate();
-
-// START EXPERIENCE (IMPORTANT FIX)
-function startExperience(){
-  document.getElementById("ui").style.display = "none";  // FIX HERE
-
-  engine.play().catch(()=>{});
-
-  console.log("Portfolio Loaded"); // debug
-}
-
-// RESIZE
-addEventListener('resize',()=>{
-  camera.aspect = innerWidth/innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth,innerHeight);
-});
-</script>
+</div>
 
 </body>
 </html>
